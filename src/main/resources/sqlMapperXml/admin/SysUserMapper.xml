@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuframework.admin.mapper.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shuframework.admin.model.SysUser">
+        <id column="id" property="id" />
+        <result column="login_name" property="loginName" />
+        <result column="nick_name" property="nickName" />
+        <result column="password" property="password" />
+        <result column="sex" property="sex" />
+        <result column="icon_url" property="iconUrl" />
+        <result column="phone_num" property="phoneNum" />
+        <result column="phone_num2" property="phoneNum2" />
+        <result column="email" property="email" />
+        <result column="address" property="address" />
+        <result column="dept_code" property="deptCode" />
+        <result column="use_type" property="useType" />
+        <result column="leave_time" property="leaveTime" />
+        <result column="sortno" property="sortno" />
+        <result column="remarks" property="remarks" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="enabled" property="enabled" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, login_name, nick_name, password, sex, icon_url, phone_num, phone_num2, email, address, dept_code, use_type, leave_time, sortno, remarks, create_by, create_time, update_time, enabled
+    </sql>
+
+    <!-- 通用查询条件 -->
+    <sql id="Dynamic_Where_Query">
+        <where>
+            <if test="beginCreateTime != null ">
+                and create_time <![CDATA[ >= ]]> #{beginCreateTime}
+            </if>
+            <if test="endCreateTime != null ">
+                and create_time <![CDATA[ <= ]]> #{endCreateTime}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="loginName != null and loginName != '' ">
+                and login_name = #{loginName}
+            </if>
+            <if test="nickName != null and nickName != '' ">
+                and nick_name = #{nickName}
+            </if>
+            <if test="password != null and password != '' ">
+                and password = #{password}
+            </if>
+            <if test="sex != null and sex != '' ">
+                and sex = #{sex}
+            </if>
+            <if test="iconUrl != null and iconUrl != '' ">
+                and icon_url = #{iconUrl}
+            </if>
+            <if test="phoneNum != null and phoneNum != '' ">
+                and phone_num = #{phoneNum}
+            </if>
+            <if test="phoneNum2 != null and phoneNum2 != '' ">
+                and phone_num2 = #{phoneNum2}
+            </if>
+            <if test="email != null and email != '' ">
+                and email = #{email}
+            </if>
+            <if test="address != null and address != '' ">
+                and address = #{address}
+            </if>
+            <if test="deptCode != null and deptCode != '' ">
+                and dept_code = #{deptCode}
+            </if>
+            <if test="useType != null and useType != '' ">
+                and use_type = #{useType}
+            </if>
+            <if test="leaveTime != null">
+                and leave_time = #{leaveTime}
+            </if>
+            <if test="sortno != null">
+                and sortno = #{sortno}
+            </if>
+            <if test="remarks != null and remarks != '' ">
+                and remarks = #{remarks}
+            </if>
+            <if test="createBy != null and createBy != '' ">
+                and create_by = #{createBy}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="enabled != null and enabled != '' ">
+                and enabled = #{enabled}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 查询 -->
+    <select id="selectPageList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_user
+        <include refid="Dynamic_Where_Query" />
+    </select>
+
+</mapper>

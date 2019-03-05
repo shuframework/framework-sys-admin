@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuframework.admin.mapper.SysAreaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shuframework.admin.model.SysArea">
+        <id column="id" property="id" />
+        <result column="area_code" property="areaCode" />
+        <result column="parent_code" property="parentCode" />
+        <result column="area_name" property="areaName" />
+        <result column="short_name" property="shortName" />
+        <result column="levels" property="levels" />
+        <result column="parent_code_path" property="parentCodePath" />
+        <result column="path_name" property="pathName" />
+        <result column="is_leaf" property="isLeaf" />
+        <result column="area_type" property="areaType" />
+        <result column="region_type" property="regionType" />
+        <result column="pinyin" property="pinyin" />
+        <result column="jianpin" property="jianpin" />
+        <result column="first_char" property="firstChar" />
+        <result column="phone_area_code" property="phoneAreaCode" />
+        <result column="zip_code" property="zipCode" />
+        <result column="longitude" property="longitude" />
+        <result column="latitude" property="latitude" />
+        <result column="sortno" property="sortno" />
+        <result column="remarks" property="remarks" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="enabled" property="enabled" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, area_code, parent_code, area_name, short_name, levels, parent_code_path, path_name, is_leaf, area_type, region_type, pinyin, jianpin, first_char, phone_area_code, zip_code, longitude, latitude, sortno, remarks, create_by, create_time, update_time, enabled
+    </sql>
+
+    <!-- 通用查询条件 -->
+    <sql id="Dynamic_Where_Query">
+        <where>
+            <if test="beginCreateTime != null ">
+                and create_time <![CDATA[ >= ]]> #{beginCreateTime}
+            </if>
+            <if test="endCreateTime != null ">
+                and create_time <![CDATA[ <= ]]> #{endCreateTime}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="areaCode != null and areaCode != '' ">
+                and area_code = #{areaCode}
+            </if>
+            <if test="parentCode != null and parentCode != '' ">
+                and parent_code = #{parentCode}
+            </if>
+            <if test="areaName != null and areaName != '' ">
+                and area_name = #{areaName}
+            </if>
+            <if test="shortName != null and shortName != '' ">
+                and short_name = #{shortName}
+            </if>
+            <if test="levels != null and levels != '' ">
+                and levels = #{levels}
+            </if>
+            <if test="parentCodePath != null and parentCodePath != '' ">
+                and parent_code_path = #{parentCodePath}
+            </if>
+            <if test="pathName != null and pathName != '' ">
+                and path_name = #{pathName}
+            </if>
+            <if test="isLeaf != null and isLeaf != '' ">
+                and is_leaf = #{isLeaf}
+            </if>
+            <if test="areaType != null and areaType != '' ">
+                and area_type = #{areaType}
+            </if>
+            <if test="regionType != null and regionType != '' ">
+                and region_type = #{regionType}
+            </if>
+            <if test="pinyin != null and pinyin != '' ">
+                and pinyin = #{pinyin}
+            </if>
+            <if test="jianpin != null and jianpin != '' ">
+                and jianpin = #{jianpin}
+            </if>
+            <if test="firstChar != null and firstChar != '' ">
+                and first_char = #{firstChar}
+            </if>
+            <if test="phoneAreaCode != null and phoneAreaCode != '' ">
+                and phone_area_code = #{phoneAreaCode}
+            </if>
+            <if test="zipCode != null and zipCode != '' ">
+                and zip_code = #{zipCode}
+            </if>
+            <if test="longitude != null">
+                and longitude = #{longitude}
+            </if>
+            <if test="latitude != null">
+                and latitude = #{latitude}
+            </if>
+            <if test="sortno != null">
+                and sortno = #{sortno}
+            </if>
+            <if test="remarks != null and remarks != '' ">
+                and remarks = #{remarks}
+            </if>
+            <if test="createBy != null and createBy != '' ">
+                and create_by = #{createBy}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="enabled != null and enabled != '' ">
+                and enabled = #{enabled}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 查询 -->
+    <select id="selectPageList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_area
+        <include refid="Dynamic_Where_Query" />
+    </select>
+
+</mapper>

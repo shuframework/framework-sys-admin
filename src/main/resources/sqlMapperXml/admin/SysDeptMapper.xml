@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shuframework.admin.mapper.SysDeptMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shuframework.admin.model.SysDept">
+        <id column="id" property="id" />
+        <result column="dept_code" property="deptCode" />
+        <result column="name" property="name" />
+        <result column="parent_code" property="parentCode" />
+        <result column="levels" property="levels" />
+        <result column="parent_code_path" property="parentCodePath" />
+        <result column="is_leaf" property="isLeaf" />
+        <result column="dept_type" property="deptType" />
+        <result column="sortno" property="sortno" />
+        <result column="remarks" property="remarks" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="enabled" property="enabled" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, dept_code, name, parent_code, levels, parent_code_path, is_leaf, dept_type, sortno, remarks, create_by, create_time, update_time, enabled
+    </sql>
+
+    <!-- 通用查询条件 -->
+    <sql id="Dynamic_Where_Query">
+        <where>
+            <if test="beginCreateTime != null ">
+                and create_time <![CDATA[ >= ]]> #{beginCreateTime}
+            </if>
+            <if test="endCreateTime != null ">
+                and create_time <![CDATA[ <= ]]> #{endCreateTime}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="deptCode != null and deptCode != '' ">
+                and dept_code = #{deptCode}
+            </if>
+            <if test="name != null and name != '' ">
+                and name = #{name}
+            </if>
+            <if test="parentCode != null and parentCode != '' ">
+                and parent_code = #{parentCode}
+            </if>
+            <if test="levels != null and levels != '' ">
+                and levels = #{levels}
+            </if>
+            <if test="parentCodePath != null and parentCodePath != '' ">
+                and parent_code_path = #{parentCodePath}
+            </if>
+            <if test="isLeaf != null and isLeaf != '' ">
+                and is_leaf = #{isLeaf}
+            </if>
+            <if test="deptType != null and deptType != '' ">
+                and dept_type = #{deptType}
+            </if>
+            <if test="sortno != null">
+                and sortno = #{sortno}
+            </if>
+            <if test="remarks != null and remarks != '' ">
+                and remarks = #{remarks}
+            </if>
+            <if test="createBy != null and createBy != '' ">
+                and create_by = #{createBy}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="enabled != null and enabled != '' ">
+                and enabled = #{enabled}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 查询 -->
+    <select id="selectPageList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_dept
+        <include refid="Dynamic_Where_Query" />
+    </select>
+
+</mapper>
